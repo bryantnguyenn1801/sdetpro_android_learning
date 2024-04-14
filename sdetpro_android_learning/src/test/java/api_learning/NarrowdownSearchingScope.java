@@ -5,9 +5,13 @@ import driver.Platform;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Pause;
 import org.openqa.selenium.interactions.PointerInput;
 import org.openqa.selenium.interactions.PointerInput.Kind;
@@ -28,44 +32,57 @@ public class NarrowdownSearchingScope {
 
             // Make sure we are on the target screen before swiping up/down/left/right/any direction
             WebDriverWait wait = new WebDriverWait(appiumDriver, Duration.ofSeconds(15L));
-            wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.androidUIAutomator("new UiSelector(). textContains(\"Form components\")")));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(
+                    AppiumBy.androidUIAutomator("new UiSelector(). textContains(\"Form components\")")));
 
-            // Swipe up before interacting
-            Dimension windowSize = appiumDriver.manage().window().getSize();
-            int screenHeight = windowSize.getHeight();
-            int screenWidth = windowSize.getWidth();
-            System.out.printf("%d x %d", screenWidth, screenHeight);
+            // Swipe down to open notification
+            openNotifications(appiumDriver);
 
-            // Construct coordinators
-            int startX = 50 * screenWidth / 100;
-            int startY = 0;
-            int endX = startX;
-            int endY = 50 * screenHeight / 100;
+            List<WebElement> notificationEleList = appiumDriver.findElements(
+                    AppiumBy.id("com.android.systemui:id/expanded"));
 
-            // Specify PointerInput as [TOUCH] with name [finger1]
-            PointerInput pointerInput = new PointerInput(Kind.TOUCH, "finger1");
-
-            // Specify sequence
-            Sequence sequence = new Sequence(pointerInput, 1)
-                    .addAction(pointerInput.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), startX, startY))
-                    .addAction(pointerInput.createPointerDown(MouseButton.LEFT.asArg()))
-                    .addAction(new Pause(pointerInput, Duration.ofMillis(250)))
-                    .addAction(pointerInput.createPointerMove(Duration.ofMillis(250), PointerInput.Origin.viewport(), endX, endY))
-                    .addAction(pointerInput.createPointerUp(MouseButton.LEFT.asArg()));
-
-            // Ask appium server to perform the sequence
-            appiumDriver.perform(Collections.singletonList(sequence));
-
+            List<String> notificationTitles = new ArrayList<>();
+            for (WebElement notificationEle : notificationEleList) {
+                // Narrow down searching scope
+                WebElement notificationTitleEle = notificationEle.findElement(
+                        AppiumBy.id("android:id/app_name_text"));
+                String notificationTitleText = notificationTitleEle.getText();
+                notificationTitles.add(notificationTitleText);
+            }
+            System.out.println(notificationTitles);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        // DEBUG PURPOSE ONLY
-        try {
-            Thread.sleep(3000);
-        } catch (Exception ignored) {
-        }
-
         appiumDriver.quit();
+    }
+    private static void openNotifications(AppiumDriver appiumDriver) {
+        // Swipe up before interacting
+        Dimension windowSize = appiumDriver.manage().window().getSize();
+        int screenHeight = windowSize.getHeight();
+        int screenWidth = windowSize.getWidth();
+
+        // Construct coordinators
+        int startX = 50 * screenWidth / 100;
+        int startY = 0;
+        int endX = startX;
+        int endY = 50 * screenHeight / 100;
+
+        // Specify PointerInput as [TOUCH] with name [finger1]
+        PointerInput pointerInput = new PointerInput(Kind.TOUCH, "finger1");
+
+        // Specify sequence
+        Sequence sequence = new Sequence(pointerInput, 1)
+                .addAction(
+                        pointerInput.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), startX,
+                                startY))
+                .addAction(pointerInput.createPointerDown(MouseButton.LEFT.asArg()))
+                .addAction(new Pause(pointerInput, Duration.ofMillis(250)))
+                .addAction(
+                        pointerInput.createPointerMove(Duration.ofMillis(250), PointerInput.Origin.viewport(),
+                                endX, endY))
+                .addAction(pointerInput.createPointerUp(MouseButton.LEFT.asArg()));
+
+        // Ask appium server to perform the sequence
+        appiumDriver.perform(Collections.singletonList(sequence));
     }
 }
