@@ -56,18 +56,21 @@ public class SwipeHorizontally {
                     throw new RuntimeException("no card on screen");
                 }
 
+                List<Integer> xNums = new ArrayList<>();
                 List<WebElement> filteredElems = new ArrayList<>();
                 for (WebElement cardElem : cardElems) {
                     Point cardCoordinates = cardElem.getLocation();
                     if (cardCoordinates.getX() != 0) {
+                        xNums.add(cardCoordinates.getX());
                         filteredElems.add(cardElem);
                     }
-                }
-                String currentCardText = filteredElems.get(0).getText().trim();
-                if (currentCardText.equals("JS.FOUNDATION")) {
-                    System.out.println("swipe time is " + swipeCounter);
-                    System.out.println("current text is " + currentCardText);
-                    break;
+                    String currentCardText = filteredElems.get(0).getText().trim();
+                    if (currentCardText.equals("FULLY OPEN SOURCE")) {
+                        System.out.println("swipe time is " + (swipeCounter + 1));
+                        System.out.println("Middle card's X coordinate: " + xNums.get(0));
+                        System.out.println("current text is " + currentCardText);
+                        break;
+                    }
                 }
                 // Specify sequence
                 Sequence sequence = new Sequence(pointerInput, 1)
@@ -84,14 +87,16 @@ public class SwipeHorizontally {
                 Thread.sleep(500);
 
             }
-        } catch (Exception e) {
+        } catch (
+                Exception e) {
             e.printStackTrace();
         }
 
         // DEBUG PURPOSE ONLY
         try {
             Thread.sleep(1000);
-        } catch (Exception ignored) {
+        } catch (
+                Exception ignored) {
         }
 
         appiumDriver.quit();
