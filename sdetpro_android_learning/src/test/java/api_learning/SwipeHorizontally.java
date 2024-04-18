@@ -6,6 +6,8 @@ import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Pause;
 import org.openqa.selenium.interactions.PointerInput;
 import org.openqa.selenium.interactions.PointerInput.Kind;
@@ -15,7 +17,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class SwipeHorizontally {
 
@@ -45,8 +49,26 @@ public class SwipeHorizontally {
             // Specify PointerInput as [TOUCH] with name [finger1]
             PointerInput pointerInput = new PointerInput(Kind.TOUCH, "finger1");
             final int MAX_SWIPE_TIME = 5;
-            String title = "SUPPORT VIDEOS";
-            for (int swipeCounter = 0; swipeCounter < MAX_SWIPE_TIME; swipeCounter++) {
+            boolean isFound = false;
+            for (int swipeCounter = 0; swipeCounter < MAX_SWIPE_TIME && !isFound; swipeCounter++) {
+                List<WebElement> cardElems = appiumDriver.findElements(AppiumBy.xpath("//android.view.ViewGroup[@content-desc='slideTextContainer']//android.widget.TextView"));
+                if (cardElems.isEmpty()) {
+                    throw new RuntimeException("no card on screen");
+                }
+
+                List<WebElement> filteredElems = new ArrayList<>();
+                for (WebElement cardElem : cardElems) {
+                    Point cardCoordinates = cardElem.getLocation();
+                    if (cardCoordinates.getX() != 0) {
+                        filteredElems.add(cardElem);
+                    }
+                }
+                String currentCardText = filteredElems.get(0).getText().trim();
+                if (currentCardText.equals("JS.FOUNDATION")) {
+                    System.out.println("swipe time is " + swipeCounter);
+                    System.out.println("current text is " + currentCardText);
+                    break;
+                }
                 // Specify sequence
                 Sequence sequence = new Sequence(pointerInput, 1)
                         .addAction(pointerInput.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), startX, startY))
@@ -61,10 +83,6 @@ public class SwipeHorizontally {
                 // Wait on purpose
                 Thread.sleep(500);
 
-                if (appiumDriver.findElement(By.xpath("//android.widget.TextView[@text='" + title + "']")).isDisplayed()) {
-                    System.out.printf("Title %s is found", appiumDriver.findElement(By.xpath("//android.widget.TextView[@text='" + title + "']")).getText());
-                    break;
-                }
             }
         } catch (Exception e) {
             e.printStackTrace();

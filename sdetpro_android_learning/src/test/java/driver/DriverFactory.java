@@ -41,7 +41,7 @@ public class DriverFactory {
 
         // Need one more thing here that we will talk in next lesson
         // Global wait time applied for the WHOLE driver session - Implicit wait
-        appiumDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10L));
+        appiumDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2L));
         return appiumDriver;
     }
 
