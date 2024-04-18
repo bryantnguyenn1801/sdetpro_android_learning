@@ -32,7 +32,7 @@ public class HandleHybridContext {
             // Custom Explicit wait
             WebDriverWait wait = new WebDriverWait(appiumDriver, Duration.ofSeconds(15L));
             wait.until(new WaitMoreThanOneContext(appiumDriver));
-
+            //casting
             if(Platform.valueOf(currentPlatform).equals(Platform.ANDROID)){
                 System.out.println(((AndroidDriver) appiumDriver).getContextHandles());
             } else {

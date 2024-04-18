@@ -4,8 +4,6 @@ import driver.DriverFactory;
 import driver.Platform;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
-import java.time.Duration;
-import java.util.Collections;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.interactions.Pause;
@@ -15,6 +13,9 @@ import org.openqa.selenium.interactions.PointerInput.MouseButton;
 import org.openqa.selenium.interactions.Sequence;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
+import java.util.Collections;
 
 public class SwipeHorizontally {
 
@@ -43,8 +44,8 @@ public class SwipeHorizontally {
 
             // Specify PointerInput as [TOUCH] with name [finger1]
             PointerInput pointerInput = new PointerInput(Kind.TOUCH, "finger1");
-
             final int MAX_SWIPE_TIME = 5;
+            String title = "SUPPORT VIDEOS";
             for (int swipeCounter = 0; swipeCounter < MAX_SWIPE_TIME; swipeCounter++) {
                 // Specify sequence
                 Sequence sequence = new Sequence(pointerInput, 1)
@@ -59,6 +60,11 @@ public class SwipeHorizontally {
 
                 // Wait on purpose
                 Thread.sleep(500);
+
+                if (appiumDriver.findElement(By.xpath("//android.widget.TextView[@text='" + title + "']")).isDisplayed()) {
+                    System.out.printf("Title %s is found", appiumDriver.findElement(By.xpath("//android.widget.TextView[@text='" + title + "']")).getText());
+                    break;
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
