@@ -48,7 +48,7 @@ public class SwipeHorizontally {
 
             // Specify PointerInput as [TOUCH] with name [finger1]
             PointerInput pointerInput = new PointerInput(Kind.TOUCH, "finger1");
-            final int MAX_SWIPE_TIME = 5;
+            final int MAX_SWIPE_TIME = 6;
             boolean isFound = false;
             for (int swipeCounter = 0; swipeCounter < MAX_SWIPE_TIME && !isFound; swipeCounter++) {
                 List<WebElement> cardElems = appiumDriver.findElements(AppiumBy.xpath("//android.view.ViewGroup[@content-desc='slideTextContainer']//android.widget.TextView"));
@@ -60,19 +60,19 @@ public class SwipeHorizontally {
                 List<WebElement> filteredElems = new ArrayList<>();
                 for (WebElement cardElem : cardElems) {
                     Point cardCoordinates = cardElem.getLocation();
-                    if (cardCoordinates.getX() != 0) {
+                    if (cardCoordinates.getX() != 0 && cardCoordinates.getX() < screenWidth / 2) {
                         xNums.add(cardCoordinates.getX());
                         filteredElems.add(cardElem);
                     }
-                    String currentCardText = filteredElems.get(0).getText().trim();
-                    if (currentCardText.equals("FULLY OPEN SOURCE")) {
-                        System.out.println("swipe time is " + (swipeCounter + 1));
-                        System.out.println("Middle card's X coordinate: " + xNums.get(0));
-                        System.out.println("current text is " + currentCardText);
-                        break;
-                    }
                 }
                 // Specify sequence
+                String currentCardText = filteredElems.get(0).getText().trim();
+                if (currentCardText.equals("COMPATIBLE")) {
+                    System.out.println("swipe time is " + (swipeCounter));
+                    System.out.println("Middle card's X coordinate: " + xNums.get(0));
+                    System.out.println("current text is " + currentCardText);
+                    break;
+                }
                 Sequence sequence = new Sequence(pointerInput, 1)
                         .addAction(pointerInput.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), startX, startY))
                         .addAction(pointerInput.createPointerDown(MouseButton.LEFT.asArg()))
