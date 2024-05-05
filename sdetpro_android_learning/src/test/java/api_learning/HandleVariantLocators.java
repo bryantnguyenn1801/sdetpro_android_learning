@@ -1,15 +1,13 @@
 package api_learning;
 
 import driver.DriverFactory;
-import driver.Platform;
+import capabilities.Platform;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.internal.CapabilityHelpers;
 
 import java.util.Map;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebElement;
 import utils.ElementHandler;
 

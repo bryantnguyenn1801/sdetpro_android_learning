@@ -1,11 +1,10 @@
 package api_learning;
 
 import driver.DriverFactory;
-import driver.Platform;
+import capabilities.Platform;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
 import java.time.Duration;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 

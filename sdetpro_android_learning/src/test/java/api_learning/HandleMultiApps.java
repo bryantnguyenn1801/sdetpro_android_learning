@@ -1,10 +1,9 @@
 package api_learning;
 
 import driver.DriverFactory;
-import driver.Platform;
+import capabilities.Platform;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.internal.CapabilityHelpers;
 
 import java.time.Duration;

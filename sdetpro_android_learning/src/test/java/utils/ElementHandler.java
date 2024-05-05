@@ -1,6 +1,6 @@
 package utils;
 
-import driver.Platform;
+import capabilities.Platform;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;

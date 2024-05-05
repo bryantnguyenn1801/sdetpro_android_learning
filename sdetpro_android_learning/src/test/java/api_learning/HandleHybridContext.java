@@ -3,22 +3,20 @@ package api_learning;
 import context.Contexts;
 import context.WaitMoreThanOneContext;
 import driver.DriverFactory;
-import driver.Platform;
+import capabilities.Platform;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.internal.CapabilityHelpers;
 import io.appium.java_client.ios.IOSDriver;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.Capabilities;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class HandleHybridContext {
 
@@ -93,8 +91,8 @@ public class HandleHybridContext {
     // TODO: good to explore - Lombook
     public static class MenuItemData {
 
-        private String name;
-        private String href;
+        private final String name;
+        private final String href;
 
         public MenuItemData(String name, String href) {
             this.name = name;
