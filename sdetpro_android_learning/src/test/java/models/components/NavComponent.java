@@ -3,9 +3,10 @@ package models.components;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 @ComponentXpathSelector(value = "//android.view.ViewGroup[2]/android.view.View")
-public class NavComponent {
+public class NavComponent extends Component{
 
     private final AppiumDriver appiumDriver;
 
@@ -16,12 +17,13 @@ public class NavComponent {
     private final static By swipeIconSel = AppiumBy.accessibilityId("faf");
     private final static By dragIconSel = AppiumBy.accessibilityId("fasfa");
 
-    public NavComponent(AppiumDriver appiumDriver) {
+    public NavComponent(AppiumDriver appiumDriver, WebElement component) {
+        super(appiumDriver, component);
         this.appiumDriver = appiumDriver;
     }
 
     public void clickOnLoginIcon() {
-        this.appiumDriver.findElement(loginIconSel).click();
+        component.findElement(loginIconSel).click();
         // TODO: Make sure we are on the Login screen. Implement below...
     }
 

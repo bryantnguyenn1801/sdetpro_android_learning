@@ -4,9 +4,14 @@ import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.lang.reflect.Constructor;
 import java.time.Duration;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Component {
     protected AppiumDriver appiumDriver;
@@ -23,14 +28,54 @@ public class Component {
         return component;
     }
 
-//    public <T extends Component> findComponent(Class<T> componentClass) {
-//        By componentSel;
-//        try {
-//            componentSel = getComponentSel(componentClass);
-//        } catch (Exception e) {
-//            throw new RuntimeException("The component must have xpath selector");
-//        }
-//    }
+    public WebElement findElement(By by) {
+        return component.findElement(by);
+    }
+
+    public List<WebElement> findElements(By by) {
+        return component.findElements(by);
+    }
+
+    public <T extends Component> T findComponent(Class<T> componentClass) {
+        return this.findComponents(componentClass).get(0);
+    }
+
+    public <T extends Component> List<T> findComponents(Class<T> componentClass) {
+        By componentSel;
+        try {
+            componentSel = getComponentSel(componentClass);
+        } catch (Exception e) {
+            throw new RuntimeException("The component must have xpath selector");
+        }
+
+        // Wait until the component displayed on the page
+        // In case the component  not on screen(for Android) need to swipe the screen
+        wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(componentSel));
+
+        // Find the elements
+        List<WebElement> elements = component.findElements(componentSel);
+
+        // Define component class's constructor
+        Class<?>[] params = new Class[]{AppiumDriver.class, WebElement.class};
+        Constructor<T> constructor;
+        try {
+            constructor = componentClass.getConstructor(params);
+        } catch (Exception e) {
+            throw new IllegalArgumentException(
+                    "[ERR] The component must have a constructor with params " + Arrays.toString(params));
+        }
+
+        // Map the elements to components
+        List<T> components = elements.stream().map(webElement -> {
+            try {
+                return constructor.newInstance(appiumDriver, webElement);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }).collect(Collectors.toList());
+        return components;
+    }
 
     public <T extends Component> By getComponentSel(Class<T> componentClass) {
         if (componentClass.isAnnotationPresent(ComponentXpathSelector.class)) {
