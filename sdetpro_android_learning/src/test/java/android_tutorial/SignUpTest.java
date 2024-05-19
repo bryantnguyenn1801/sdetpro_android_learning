@@ -1,7 +1,7 @@
 package android_tutorial;
 
-import driver.DriverFactory;
-import capabilities.Platform;
+import learning.driver.DriverFactory;
+import learning.capabilities.Platform;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import org.testng.annotations.AfterClass;
