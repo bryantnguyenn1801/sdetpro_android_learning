@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Practice Suite" verbose="1" parallel="classes" thread-count="4" configfailurepolicy="continue">
+    <listeners>
+        <listener class-name="my.setel.utils.listener.TestNgMobileCustomListener"></listener>
+    </listeners>
+    <parameter name="mobilePlatform" value="android"/>
+    <parameter name="devicePool" value="device_pool_android.json"/>
+    <method-selectors>
+        <method-selector>
+            <script language="beanshell">
+                <![CDATA[
+						import java.util.ArrayList;
+
+						String whatGroup = System.getProperty("groups");
+
+						if (whatGroup.isEmpty()) {
+								return true;
+						}
+
+						if (!whatGroup.contains(",")) {
+								return groups.containsKey(whatGroup);
+						}
+						String[] whatGroups = whatGroup.split(",");
+
+						boolean flag = false;
+						for (String eachGroup: whatGroups) {
+								if (groups.containsKey(eachGroup.trim())) {
+										flag = true;
+								}
+						}
+						flag;
+				]]>
+            </script>
+        </method-selector>
+    </method-selectors>
+    <test name="Tests on Android Emulator">
+        <classes>
+            <class name="tests.SignUpTest"/>
+
+        </classes>
+    </test>
+
+
+</suite>
