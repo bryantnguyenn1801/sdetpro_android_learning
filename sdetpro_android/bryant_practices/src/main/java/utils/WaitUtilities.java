@@ -20,14 +20,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class WaitUtilities{
 
-    public static WebElement waitForElement(WebElement el){
+    public static WebElement waitForElement(By el){
         try{
             WebDriverWait wait = (WebDriverWait) new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(30)).ignoring(StaleElementReferenceException.class);
-            wait.until(ExpectedConditions.visibilityOf(el));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(el));
         } catch (TimeoutException toe){
             throw new AssertionError(toe.getMessage());
         }
-        return el;
+        return (WebElement) el;
     }
 
     public static List<WebElement> waitForNonZeroListOfElements(List<WebElement> els){
@@ -215,10 +215,10 @@ public class WaitUtilities{
         }
     }
 
-    public static boolean isElementDisplayed(WebElement element){
+    public static boolean isElementDisplayed(By element){
         boolean elementDisplayed = false;
         try{
-            if (element.isDisplayed()){
+            if (((WebElement)element).isDisplayed()){
                 elementDisplayed = true;
             }
         } catch (Exception e){

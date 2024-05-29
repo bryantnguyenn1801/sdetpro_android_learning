@@ -50,7 +50,7 @@ public class Devices {
         } catch (Exception e){
             System.out.println(e.getMessage());
             System.out.println("Failed to load properties. Looking for default.properties");
-            is = DevicesManager.class.getResourceAsStream("/devices/default.properties");
+            is = DevicesManager.class.getResourceAsStream("/devices/local_android.properties");
             data.load(is);
         }
         PLATFORM = data.getProperty("platformName");

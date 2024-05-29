@@ -3,8 +3,9 @@ package learning.test_flows.authentication;
 import io.appium.java_client.AppiumDriver;
 import learning.models.pages.LoginScreen;
 import learning.models.pages.PopUpForm;
-import learning.test_flows.webview.BaseFlow;
+import learning.test_flows.BaseFlow;
 import org.apache.commons.validator.routines.EmailValidator;
+import org.testng.Assert;
 
 public class LoginFlow extends BaseFlow {
 
@@ -17,6 +18,7 @@ public class LoginFlow extends BaseFlow {
         super(appiumDriver);
         this.email = email;
         this.password = password;
+        loginScreen = new LoginScreen(appiumDriver);
     }
 
     public void login() {
@@ -50,10 +52,10 @@ public class LoginFlow extends BaseFlow {
     }
 
     public void verifyCorrectLoginCreds() {
-//        LoginScreen loginScreen = new LoginScreen(appiumDriver);
-        PopUpForm popUpForm = loginScreen.openPopUpDialog();
-        popUpForm.verifyMessage("You are logged in!");
-        popUpForm.dialogButton().click();
+        String expectedSuccessMsg = "You are logged in!";
+        String actualSuccessMsg = loginScreen.openPopUpDialog().getDialogMsg();
+        Assert.assertEquals(expectedSuccessMsg, actualSuccessMsg, "[ERR] Wrong success login msg");
+        loginScreen.openPopUpDialog().btnDialog().click();
     }
 
     public void verifyIncorrectEmail() {

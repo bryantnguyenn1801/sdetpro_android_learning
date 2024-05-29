@@ -39,7 +39,7 @@ public class LoginScreen extends BasePage {
     }
 
     public PopUpForm openPopUpDialog() {
-       return findComponent(PopUpForm.class);
+       return new PopUpForm(appiumDriver);
     }
 
 

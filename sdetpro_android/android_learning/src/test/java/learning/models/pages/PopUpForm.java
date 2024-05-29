@@ -2,34 +2,31 @@ package learning.models.pages;
 
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
-import learning.models.components.Component;
 import learning.models.components.ComponentIdSelector;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 @ComponentIdSelector(value = "android:id/parentPanel")
-public class PopUpForm extends Component {
-    private final static By dialogMsgLoc = AppiumBy.id("android:id/message");
-    private final static By dialogBtnLoc = AppiumBy.id("android:id/button1");
+public class PopUpForm extends BasePage {
+    private By dialogMsgLoc = AppiumBy.id("android:id/message");
+    private By dialogBtnLoc = AppiumBy.id("android:id/button1");
 
-    public PopUpForm(AppiumDriver appiumDriver, By locator) {
-        super(appiumDriver, locator);
+    public PopUpForm(AppiumDriver appiumDriver) {
+        super(appiumDriver);
     }
 
 
-    public WebElement messageLoginSucceed() {
-        return getComponent().findElement(dialogMsgLoc);
+    public String getDialogMsg(){
+        this.wait.until(ExpectedConditions.visibilityOfElementLocated(dialogMsgLoc));
+        return this.appiumDriver.findElement(dialogMsgLoc).getText();
     }
 
-    public WebElement dialogButton() {
-        return getComponent().findElement(dialogBtnLoc);
+    public WebElement btnDialog(){
+        this.wait.until(ExpectedConditions.visibilityOfElementLocated(dialogBtnLoc));
+        return this.appiumDriver.findElement(dialogBtnLoc);
     }
 
-    public PopUpForm verifyMessage(String expectedMessage) {
-        Assert.assertEquals(this.messageLoginSucceed().getText(), expectedMessage);
 
-        return this;
-    }
 
 }

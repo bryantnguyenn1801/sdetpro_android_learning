@@ -3,7 +3,7 @@ package learning;
 import learning.capabilities.Platform;
 import learning.driver.DriverFactory;
 import io.appium.java_client.AppiumDriver;
-import learning.models.components.NavComponent;
+import learning.models.components.global.NavComponent;
 import learning.models.pages.BasePage;
 
 public class TestComponentBaseModel {

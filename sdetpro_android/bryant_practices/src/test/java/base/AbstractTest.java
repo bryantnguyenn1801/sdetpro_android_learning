@@ -13,32 +13,24 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
 import java.net.URL;
 
 public class AbstractTest {
-    private static final String STF_SERVICE_URL = "http://localhost:7100";  // Change this URL
-    private static final String ACCESS_TOKEN = "1151e170b6cb4b3e8f30676dd6500b7d8d8cb5ed77c84b34b629c5aa5917078f";  // Change this access token
-
     protected CommonActions userActions = new CommonActions();
     private static final DevicesManager devicesManager = new DevicesManager();
     private static final DriverManager driverManager = new DriverManager();
-    private final String destPath = "/Users/setelqa/apps/";
+    private final String destPath = "/Users/bryantnguyen1801/Documents/SDETPRO/sdetpro_mobile/sdetpro_android/bryant_practices/src/test/resources/apps";
     ;
 
     @BeforeSuite(alwaysRun = true)
     @Parameters({"mobilePlatform", "devicePool", "env", "simulator"})
-    public void suiteSetUp(@Optional() String mobilePlatform, @Optional() String devicePool, @Optional("staging") String env, @Optional("off") String simulator) throws IOException {
-//        ReportPortalManager.setReportPortal(true);
+    public void suiteSetUp(@Optional() String mobilePlatform, @Optional() String devicePool, @Optional("local") String env, @Optional("on") String simulator) throws IOException {
         System.setProperty("platformName", mobilePlatform);
         if (System.getProperty("baseEnv") == null) {
             System.setProperty("baseEnv", env);
         }
         new MobileUserRegistry(System.getProperty("platformName"));
-//        new Url(System.getProperty("setelAPI.baseEnv"));
-//        boolean isCiEnv = Boolean.parseBoolean(System.getenv("CI"));
-        if (ConfigManager.getMobilePlatform().equals(MobilePlatform.IOS)) {
+        if (ConfigManager.getMobilePlatform().equals(MobilePlatform.ANDROID)) {
             devicesManager.loadDevicePool(devicePool);
         }
     }
@@ -63,7 +55,7 @@ public class AbstractTest {
         if (DevicesManager.deviceIsRemote.get(deviceName)) {
             ServicesManager.startAppiumServer(deviceName, osVersion);
             appiumServiceUrl = new URL(String.format("http://%s:%s/", ServicesManager.getAppiumPort()));
-            cap.setCapability("app", destPath + "Setel-Staging.app");
+            cap.setCapability("app", destPath + "android.wdio.native.app.v1.0.8.apk");
             System.out.println("------redefine app path for remote machine -----");
             System.out.println("------ " + destPath + " -----");
         } else {

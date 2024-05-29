@@ -2,15 +2,11 @@ package config;
 
 import static io.appium.java_client.service.local.flags.GeneralServerFlag.*;
 
-//import com.jcraft.jsch.JSchException;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServerHasNotBeenStartedLocallyException;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
-//import my.setel.utils.LogHelper;
-//import my.setel.utils.SshRemoteSessionManager;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -63,24 +59,6 @@ public class ServicesManager {
             e.printStackTrace();
         }
     }
-
-    //temporary working for macos only
-//    public static void startAppiumOnRemoteServer(String mobileName, String osVersion, String user, String pwd, String host) {
-//        try {
-//            String appiumLogPath = System.currentTimeMillis() + "_" + mobileName + "_" + osVersion + ".text";
-//            String startAppiumCommand = "export PATH=\"/usr/local/bin:$PATH\" && appium-controller --start -p 0 --host 0.0.0.0 --shutdown false --logDir '" + appiumLogPath + "'";
-//            System.out.println(startAppiumCommand);
-//            SshRemoteSessionManager sshSession = new SshRemoteSessionManager().getSession(user, pwd, host);
-//            String appiumServerUrl = sshSession.sendCommand(startAppiumCommand);
-//            appiumServerUrl = appiumServerUrl.substring(appiumServerUrl.indexOf("<"), appiumServerUrl.indexOf(">")).replaceAll("[^0-9]", "");
-//            System.out.println(appiumLogPath);
-//            appiumPort.set(appiumServerUrl);
-//            System.out.println("Appium server started at: - " + host + appiumServerUrl);
-//        } catch (Exception e) {
-//            System.out.println("--------------An appium server node is not started!--------------");
-//            e.printStackTrace();
-//        }
-//    }
 
     public static void stopAppiumServer() {
         try {

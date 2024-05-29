@@ -112,8 +112,7 @@ public class ConciseApi {
         return this;
     }
 
-
-    public WebElement clickOnElement(WebElement element){
+    public WebElement clickOnElement(By element){
         WebElement el = waitForElement(element);
         try{
             el.click();
@@ -139,7 +138,7 @@ public class ConciseApi {
         return el;
     }
 
-    public WebElement typeValue(WebElement element, String value){
+    public WebElement typeValue(By element, String value){
         WebElement el = waitForElement(element);
         try{
             el.clear();
@@ -200,7 +199,7 @@ public class ConciseApi {
 
         driver.perform(Collections.singletonList(sequence));
     }
-    public void swipeHorizontalToElement(WebElement e,double startPercentage, double finalPercentage, double anchorPercentage) throws Exception{
+    public void swipeHorizontalToElement(By e,double startPercentage, double finalPercentage, double anchorPercentage) throws Exception{
         int cycles = 10;
         int counter = 0;
         while(counter<cycles){
@@ -574,13 +573,13 @@ public class ConciseApi {
     }
 
     @Step
-    public void verifyElementEnabled(WebElement e){
+    public void verifyElementEnabled(By e){
         waitForElement(e);
         Assert.assertTrue(isElementEnabled(e));
     }
 
     @Step
-    public void verifyElementDisabled(WebElement e){
+    public void verifyElementDisabled(By e){
         waitForElement(e);
         Assert.assertFalse(isElementEnabled(e));
     }

@@ -46,17 +46,6 @@ public class DevicesManager {
         System.out.println("Found devices");
         for (String s : yourList){
             System.out.println(s);
-//            try{
-//                Devices device = new Devices().getDeviceInformationFrom(s);
-//                DesiredCapabilities cap = CapabilityGenerate.withPropertiesNew(device);
-//                deviceInfo.put(s, cap);
-//                deviceIsRemote.put(cap.getCapability("deviceName").toString(),device.isIS_ON_REMOTE_MACHINE());
-//                //try catch to ignore when failed to load device capabilities
-//                devicePool.put(s, false);
-//            } catch (IOException e){
-//                e.printStackTrace();
-//                System.out.println("Failed to load :" + s);
-//            }
         }
     }
 
@@ -67,7 +56,7 @@ public class DevicesManager {
         DesiredCapabilities cap = null;
         int attempt = 0;
 
-        while (deviceName.equals("") && attempt < 30){
+        while (deviceName.equals("") && attempt < 10){
             System.out.println("Trying to find free devices:" + attempt);
             deviceName = findFreeDevice();
             attempt++;

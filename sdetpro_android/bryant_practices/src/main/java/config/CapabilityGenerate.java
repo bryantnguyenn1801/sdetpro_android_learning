@@ -7,10 +7,6 @@ import models.devices.Devices;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 public class CapabilityGenerate{
-    private static final String DERIVED_DATA_TEMP_DIR = "/Library/Developer/Xcode/DerivedData/";
-    private static final int MIN = 9001;
-    private static final int MAX = 11000;
-
     public static DesiredCapabilities withProperties(Devices devicesManager){
         DesiredCapabilities cap = new DesiredCapabilities();
         cap.setCapability(MobileCapabilityType.PLATFORM_NAME, devicesManager.getPLATFORM());
