@@ -18,6 +18,7 @@ public class BaseScreen extends ConciseApi {
     public NavigationBar getNavigation() {
         return new NavigationBar();
     }
+
     protected String lblEvaluateOf(String label) {
         return new MultipleXpathEvaluate()
                 .android(String.format("//*[contains(translate(@text, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '%s')]", label.toLowerCase()))

@@ -1,5 +1,5 @@
 {
   "devicePool": [
-    "local_android.properties"
+    "default.properties"
   ]
 }

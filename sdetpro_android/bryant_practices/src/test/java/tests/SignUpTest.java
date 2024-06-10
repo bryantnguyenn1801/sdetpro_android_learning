@@ -4,10 +4,10 @@ import base.AbstractTest;
 import config.PageFactoryManager;
 import models.screens.common.BaseScreen;
 import org.testng.annotations.Test;
-import utils.DataUser;
+
+import static data.user.MobileUserRegistry.*;
 
 public class SignUpTest extends AbstractTest {
-    DataUser user = new DataUser();
 
     @Test(groups = {"regression"})
     public void signUp_with_valid_email_and_pwd() {
@@ -15,12 +15,12 @@ public class SignUpTest extends AbstractTest {
                 .getNavigation()
                 .goLoginScreen()
                 .clickSignUpForm()
-                .inputEmail(user.validEmail)
-                .inputPassword(user.validPassword)
-                .confirmPassword(user.validPassword)
+                .inputEmail(USER_LOGIN_WITH_VALID_EMAIL_AND_PASSWORD.validEmail)
+                .inputPassword(USER_LOGIN_WITH_VALID_EMAIL_AND_PASSWORD.validEmail)
+                .confirmPassword(USER_LOGIN_WITH_VALID_EMAIL_AND_PASSWORD.validEmail)
                 .clickSignUpButton()
                 .verifySignUp()
-                .clickOKButton();
+                .clickOKBtn();
 
     }
 }

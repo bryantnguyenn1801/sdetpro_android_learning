@@ -21,13 +21,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class WaitUtilities{
 
     public static WebElement waitForElement(By el){
-        try{
-            WebDriverWait wait = (WebDriverWait) new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(30)).ignoring(StaleElementReferenceException.class);
-            wait.until(ExpectedConditions.visibilityOfElementLocated(el));
-        } catch (TimeoutException toe){
-            throw new AssertionError(toe.getMessage());
+        try {
+            WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(30));
+            wait.ignoring(StaleElementReferenceException.class);
+            return wait.until(ExpectedConditions.visibilityOfElementLocated(el));
+        } catch (TimeoutException toe) {
+            throw new AssertionError("Element not found within the specified timeout: " + toe.getMessage());
         }
-        return (WebElement) el;
     }
 
     public static List<WebElement> waitForNonZeroListOfElements(List<WebElement> els){

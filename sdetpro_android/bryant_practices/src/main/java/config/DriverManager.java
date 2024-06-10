@@ -44,9 +44,11 @@ public class DriverManager {
         try {
             AppiumDriver currentDriverSession = null;
             MobilePlatform platform = ConfigManager.getMobilePlatform();
+            int systemPort = 4725;
+            capabilities.setCapability("systemPort", systemPort);
             if (platform.equals(MobilePlatform.ANDROID)) {
                 currentDriverSession = setUpAndroidDriver(serviceUrl, capabilities);
-
+                System.out.println(currentDriverSession);
             } else if (platform.equals(MobilePlatform.IOS)) {
                 currentDriverSession = setUpiOSDriver(serviceUrl, capabilities);
             }
@@ -68,15 +70,15 @@ public class DriverManager {
     }
 
     private static AppiumDriver setUpAndroidDriver(URL url, DesiredCapabilities capabilities) {
-        System.out.println(" DesiredCapabilities: \n" + capabilities.toString());
-        AppiumDriver currentDriverSession = null;
+        System.out.println("DesiredCapabilities: \n" + capabilities.toString());
+        AppiumDriver currentDriverSession;
         currentDriverSession = new AndroidDriver(url, capabilities);
         return currentDriverSession;
     }
 
     private static AppiumDriver setUpiOSDriver(URL url, DesiredCapabilities capabilities) {
         System.out.println(" DesiredCapabilities: \n" + capabilities.toString());
-        AppiumDriver currentDriverSession = null;
+        AppiumDriver currentDriverSession;
         currentDriverSession = new IOSDriver(url, capabilities);
         return currentDriverSession;
     }

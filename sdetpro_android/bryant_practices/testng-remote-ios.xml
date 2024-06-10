@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="BryantTestSuiteIOS" verbose="1" parallel="tests" thread-count="4">
+    <parameter name="mobilePlatform" value="iOS"/>
+    <parameter name="devicePool" value="device_pool_ios.json"/>
+    <test name="App test on iPhone 8 with iOS 16">
+        <classes>
+                        <class name="tests.SignUpTest"></class>
+            <!--            <class name="tests.LoginTest"></class>-->
+<!--            <class name="tests.FormComponentsTest"></class>-->
+        </classes>
+    </test>
+</suite>

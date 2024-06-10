@@ -41,6 +41,8 @@ public class Devices {
     private String UPDATED_WDA_BUNDLE_ID;
     @Getter
     private boolean IS_ON_REMOTE_MACHINE;
+    @Getter
+    private String AVD;
 
     public Devices getDeviceInformationFrom(String resource) throws IOException {
         InputStream is = DevicesManager.class.getResourceAsStream("/devices/" + resource);
@@ -50,7 +52,7 @@ public class Devices {
         } catch (Exception e){
             System.out.println(e.getMessage());
             System.out.println("Failed to load properties. Looking for default.properties");
-            is = DevicesManager.class.getResourceAsStream("/devices/local_android.properties");
+            is = DevicesManager.class.getResourceAsStream("/devices/default.properties");
             data.load(is);
         }
         PLATFORM = data.getProperty("platformName");
@@ -58,7 +60,7 @@ public class Devices {
         DEVICE_NAME = data.getProperty("deviceName");
         SYSTEM_PORT = data.getProperty("systemPort");
         APP_PATH =
-                System.getProperty("user.dir") + "/src/test/resources/apps/" + data.getProperty("app");
+                System.getProperty("user.dir") + "/bryant_practices/src/test/resources/apps/" + data.getProperty("app");
         APP_PACKAGE = data.getProperty("appPackage");
         APP_ACTIVITY = data.getProperty("appActivity");
         IS_REAL = Boolean.parseBoolean(data.getProperty("isReal"));
@@ -70,6 +72,7 @@ public class Devices {
         UDID = data.getProperty("udid");
         UPDATED_WDA_BUNDLE_ID = data.getProperty("updatedWDABundleId");
         IS_ON_REMOTE_MACHINE = Boolean.parseBoolean(data.getProperty("isOnRemoteMachine"));
+        AVD = data.getProperty("avd");
         return this;
     }
 }

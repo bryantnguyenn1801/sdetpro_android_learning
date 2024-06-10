@@ -127,8 +127,12 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.14.0</version>
         </dependency>
-
-
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>5.1.0.RELEASE</version>
+        </dependency>
+        <!-- Thanks for using https://jar-download.com -->
 
     </dependencies>
     <modules>

@@ -13,5 +13,8 @@ public class DataUser {
     public String invalidEmail;
     @SerializedName("invalidPassword")
     public String invalidPassword;
+    @SerializedName("randomText")
+    public String randomText;
+
 
 }

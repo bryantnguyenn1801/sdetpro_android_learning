@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Setel Regression Suite" verbose="1" parallel="tests" thread-count="4">
+<suite name="BryantTestSuites" verbose="1" parallel="tests" thread-count="4">
     <parameter name="mobilePlatform" value="android"/>
-    <parameter name="devicePool" value="local_device_pool_android.json"/>
-    <test name="App test on Pixel 4 API 31 with Android 12.0">
+    <parameter name="devicePool" value="device_pool_android.json"/>
+    <test name="App test on Pixel 4 API 31 with Android 12">
         <classes>
-            <class name="tests.SignUpTest">
-                <methods>
-                    <include name="signUp_with_valid_email_and_pwd"/>
-                </methods>
-            </class>
+            <class name="tests.SignUpTest"/>
+<!--            <class name="tests.LoginTest"></class>-->
+<!--            <class name="tests.FormComponentsTest"></class>-->
         </classes>
     </test>
 </suite>

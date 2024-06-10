@@ -7,7 +7,7 @@ public class ConfigManager {
     }
 
     public static MobilePlatform getMobilePlatform() {
-        String platform = System.getProperty("setelUI.platformName");
+        String platform = System.getProperty("platformName");
         if (platform == null) {
             platform = "iOS";
         }
@@ -16,9 +16,9 @@ public class ConfigManager {
     }
 
     public static String getDeviceName() {
-        String deviceName = System.getProperty("setelUI.deviceName");
+        String deviceName = System.getProperty("deviceName");
         if (deviceName == null) {
-            throw new IllegalArgumentException("Property [setelUI.deviceName] is null, please set the correct property value");
+            throw new IllegalArgumentException("Property [deviceName] is null, please set the correct property value");
         } else {
             return deviceName;
         }
