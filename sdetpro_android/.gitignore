@@ -33,6 +33,7 @@ build/
 
 ### Mac OS ###
 .DS_Store
+**/.DS_Store
 
 allure-results
 appiumLogs/
