@@ -2,11 +2,15 @@ package tests;
 
 import base.AbstractTest;
 import config.PageFactoryManager;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
 import models.screens.common.BaseScreen;
 import org.testng.annotations.Test;
 
 import static data.user.MobileUserRegistry.*;
 
+@Epic("Bryant is Practicing")
+@Feature("Login Test")
 public class LoginTest extends AbstractTest {
 
     @Test(description = "E2E | Login test flow with invalid email", groups = {"regression"})

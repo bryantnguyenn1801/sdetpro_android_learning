@@ -76,7 +76,7 @@ public class ConciseApi {
         return this;
     }
 
-    public WebElement clickOnElement(By element) {
+    public WebElement clickOnElement(WebElement element) {
         WebElement el = waitForElement(element);
         try {
             el.click();
@@ -102,7 +102,7 @@ public class ConciseApi {
         return el;
     }
 
-    public WebElement typeValue(By element, String value) {
+    public WebElement typeValue(WebElement element, String value) {
         WebElement el = waitForElement(element);
         try {
             el.clear();
@@ -395,13 +395,13 @@ public class ConciseApi {
     }
 
     @Step
-    public void verifyElementEnabled(By e) {
+    public void verifyElementEnabled(WebElement e) {
         waitForElement(e);
         Assert.assertTrue(isElementEnabled(e));
     }
 
     @Step
-    public void verifyElementDisabled(By e) {
+    public void verifyElementDisabled(WebElement e) {
         waitForElement(e);
         Assert.assertFalse(isElementEnabled(e));
     }

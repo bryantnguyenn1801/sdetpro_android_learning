@@ -28,7 +28,7 @@ public class ServicesManager {
         try {
             stopAppiumServer();
             AppiumServiceBuilder builder = new AppiumServiceBuilder();
-            int port = 4723;
+            int port = findFreePort();;
             builder.withIPAddress("127.0.0.1");
             builder.usingPort(port);
             builder.withArgument(GeneralServerFlag.RELAXED_SECURITY).withArgument(GeneralServerFlag.SESSION_OVERRIDE).withArgument(GeneralServerFlag.LOG_LEVEL, "debug").withArgument(() -> {

@@ -3,9 +3,13 @@ package tests;
 import base.AbstractTest;
 import config.PageFactoryManager;
 import config.strings.StringConstants;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
 import models.screens.common.BaseScreen;
 import org.testng.annotations.Test;
 
+@Epic("Bryant is Practicing")
+@Feature("Form Components Test")
 public class FormComponentsTest extends AbstractTest {
 
     @Test(description = "E2E | Forms Components Test Flow",

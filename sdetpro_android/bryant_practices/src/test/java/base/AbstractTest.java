@@ -1,6 +1,5 @@
 package base;
 
-import actions.CommonActions;
 import com.google.common.collect.ImmutableMap;
 import config.ConfigManager;
 import config.DevicesManager;
@@ -11,33 +10,30 @@ import data.user.MobileUserRegistry;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
 import org.testng.annotations.*;
+import utils.AllureUtils;
+import utils.listener.TestNgMobileCustomListener;
 
 import java.io.IOException;
 import java.net.URL;
 
+@Listeners({TestNgMobileCustomListener.class})
 public class AbstractTest {
-    protected CommonActions userActions = new CommonActions();
     private static final DevicesManager devicesManager = new DevicesManager();
 
     @BeforeSuite(alwaysRun = true)
-    @Parameters({"mobilePlatform", "devicePool", "env", "simulator"})
-    public void suiteSetUp(@Optional() String mobilePlatform, @Optional() String devicePool, @Optional("local") String env, @Optional("on") String simulator) throws IOException {
+    @Parameters({"mobilePlatform", "devicePool"})
+    public void suiteSetUp(@Optional() String mobilePlatform, @Optional() String devicePool) {
         System.setProperty("platformName", mobilePlatform);
-//        if (System.getProperty("baseEnv") == null) {
-//            System.setProperty("baseEnv", env);
-//        }
         new MobileUserRegistry(System.getProperty("platformName"));
         devicesManager.loadDevicePool(devicePool);
-//        if (ConfigManager.getMobilePlatform().equals(MobilePlatform.ANDROID)) {
-//        }
     }
 
     @AfterSuite(alwaysRun = true)
-    public void suiteTearDown() throws IOException {
+    public void suiteTearDown() {
+        AllureUtils.addAllureProperties();
         DriverManager.closeAllNodeServer();
         ServicesManager.stopAppiumServer();
     }
-
 
     @BeforeTest(alwaysRun = true)
     public void init() throws Exception {

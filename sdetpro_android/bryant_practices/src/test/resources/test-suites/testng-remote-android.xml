@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="BryantTestSuites" verbose="1" parallel="tests" thread-count="4">
+<suite name="BryantTestSuites" verbose="2" parallel="tests" thread-count="4">
     <parameter name="mobilePlatform" value="android"/>
     <parameter name="devicePool" value="device_pool_android.json"/>
+
     <test name="App test on Pixel 4 API 31 with Android 12">
         <classes>
             <class name="tests.SignUpTest"/>
-<!--            <class name="tests.LoginTest"></class>-->
-<!--            <class name="tests.FormComponentsTest"></class>-->
+            <class name="tests.LoginTest"/>
+            <class name="tests.FormComponentsTest"/>
         </classes>
     </test>
 </suite>

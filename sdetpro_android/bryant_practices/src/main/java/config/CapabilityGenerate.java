@@ -7,6 +7,8 @@ import models.devices.Devices;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.springframework.util.SocketUtils;
 
+import static org.openqa.selenium.net.PortProber.findFreePort;
+
 public class CapabilityGenerate {
     private static final int MIN = 9001;
     private static final int MAX = 11000;
@@ -28,7 +30,7 @@ public class CapabilityGenerate {
                 cap.setCapability(AndroidCapabilityType.UDID_OPTION, devicesManager.getUDID());
             }
             cap.setCapability(AndroidCapabilityType.AUTO_GRANT_PERMISSIONS_OPTION, true);
-            cap.setCapability(AndroidCapabilityType.SYSTEM_PORT_OPTION, devicesManager.getSYSTEM_PORT());
+            cap.setCapability(AndroidCapabilityType.SYSTEM_PORT_OPTION, findFreePort());
             cap.setCapability(AndroidCapabilityType.APP_PACKAGE_OPTION, devicesManager.getAPP_PACKAGE());
             cap.setCapability(AndroidCapabilityType.APP_WAIT_ACTIVITY_OPTION, devicesManager.getAPP_WAIT_ACTIVITY());
             cap.setCapability(AndroidCapabilityType.APP_ACTIVITY_OPTION, devicesManager.getAPP_ACTIVITY());
