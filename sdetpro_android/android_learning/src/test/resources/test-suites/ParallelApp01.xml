@@ -1,0 +1,18 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Parallel Suite Approach 01" parallel="tests" thread-count="10">
+  <test name="Group 01">
+    <parameter name="systemPort" value="8300"/>
+    <parameter name="udid" value="emulator-5554"/>
+    <classes>
+      <class name="learning.tests.authen.LoginTest"/>
+    </classes>
+  </test>
+  <test name="Group 02">
+    <parameter name="systemPort" value="8400"/>
+    <parameter name="udid" value="G001L90613160GKL"/>
+    <classes>
+      <class name="learning.tests.swipe.SwipeVertically"/>
+    </classes>
+  </test>
+</suite>
