@@ -16,7 +16,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import learning.utils.ElementHandler;
 
 public class HandleMultiApps {
-    static AppiumDriver appiumDriver = DriverFactory.getDriver(Platform.ANDROID);
+    public static AppiumDriver appiumDriver = DriverFactory.getDriver(Platform.ANDROID);
 
     public static void inputUserDetails() {
         // Login Action
