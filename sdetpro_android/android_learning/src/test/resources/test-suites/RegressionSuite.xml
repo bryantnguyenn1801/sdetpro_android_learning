@@ -1,0 +1,17 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<!-- BeforeSuite Hook -->
+<suite name="Regression Suite">
+    <!-- BeforeTest Hook -->
+    <test name="Authentication">
+        <classes>
+            <!-- BeforeClass Hook -->
+            <!-- BeforeMethod Hook -->
+            <class name="learning.tests.testng.TestNGBasic"/>
+            <!-- AfterMethod Hook -->
+            <!-- AfterClass Hook -->
+        </classes>
+    </test>
+    <!-- AfterTest Hook -->
+</suite>
+        <!-- AfterSuite Hook -->

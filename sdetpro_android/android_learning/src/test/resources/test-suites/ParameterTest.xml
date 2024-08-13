@@ -1,0 +1,18 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Parameters Test Suite">
+  <test name="Group 01">
+    <parameter name="systemPort" value="8300"/>
+    <parameter name="udid" value="emulator-5554"/>
+    <classes>
+      <class name="learning.tests.explore.parameters.ParameterTest01"/>
+    </classes>
+  </test>
+  <test name="Group 02">
+    <parameter name="systemPort" value="8400"/>
+    <parameter name="udid" value="G001L90613160GKL"/>
+    <classes>
+      <class name="learning.tests.explore.parameters.ParameterTest02"/>
+    </classes>
+  </test>
+</suite>

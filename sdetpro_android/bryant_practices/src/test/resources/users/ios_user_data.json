@@ -1,0 +1,14 @@
+{
+  "user_login_with_invalid_email": {
+    "invalidEmail": "bryant.nguyen1801",
+    "validPassword": "12345678"
+  },
+  "user_login_with_invalid_password": {
+    "validEmail": "bryant.nguyen1801@gmail.com",
+    "invalidPassword": "123"
+  },
+  "user_login_with_valid_email_and_password": {
+    "validEmail": "bryant.nguyen1801@gmail.com",
+    "validPassword": "12345678"
+  }
+}
